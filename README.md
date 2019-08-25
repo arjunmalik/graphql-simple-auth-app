@@ -54,4 +54,4 @@ Use the Application
 1. npm install
 2. npm run dev (by default application will be served on http://localhost:4000/)  
 Fetches the PassportJS configuration for authentication from commmit - https://github.com/arjunmalik/graphql-simple-auth-app/commit/17826d64f9f731477527788bcaafe65186f785b7.  
-To successfully run this app please provide the MogoDB URI for your cluster in file server.js, const MONGO_URI. Clusters can be created free of cost at https://cloud.mongodb.com.
+To successfully run this app, please provide the MogoDB URI, for your cluster, in file server.js - const MONGO_URI. Clusters can be created free of cost at https://cloud.mongodb.com.
