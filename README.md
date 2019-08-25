@@ -4,14 +4,14 @@ Restful Routing vs GraphQL
 
 1. Restful routing are conventions used in web-development for manipulating the data on the server, when used with http most common set of operations are post, get, put, delete.
    Graphql on the other hand is also an API design structure, which is a representation of all the resources in our application as nodes and all the relation as edges, in the form of graph.
-2. Restful routing with highly related data start to gets messy, we either end up doing too many http requests or writing lots of endpoints very tightly coupled with the type of data we need on the frontend. Decuding on the url schema starts to gets tough on a heavily nested relationships.
+2. Restful routing with highly related data start to gets messy, we either end up doing too many http requests or starts writing lots of endpoints, which are very tightly coupled with the type of data we need on the frontend. Deciding on the url schema starts to gets tough on a heavily nested relationships.
 3. Restful routing is also vulnerable to overfetching of the data.
 
 For ex: To fetch the companies list of all the friends of user - 23.
-We either have to do many http requests - users/23/friends will give the list of all the friends of the user, and then for each user we feth the company list.
-Or we have to write endpoints very tightly coupled to the kind of data we need on the UI - users/23/friends/companies, or users/23/friends_with_comapnies_and_positions if we also want the postion list along with company list, breaking the restful conventions.
+We either have to do many http requests -> users/23/friends will give the list of all the friends of the user, and then for each user we fetch the company list.
+Or we have to write endpoints, very tightly coupled to the kind of data we need on the UI - users/23/friends/companies, or users/23/friends_with_comapnies_and_positions if we also want the postion list along with company list, breaking the restful conventions.
 
-In case of GraphQL which reresents all our data in the form of graph and all the relations in the form of edges:
+In case of GraphQL which reresents all our data, in the form of graph and all the relations in the form of edges:
 i) Find a node/user with id 23.
 ii) Then find all the friend/relation/edge associated with the user.
 iii) Finally get the company of all the friends.
@@ -19,14 +19,14 @@ iii) Finally get the company of all the friends.
 
  Fundamentals of GraphQL
 -------------------------
-1. GraphQL doesn't go to our databases and figure out the relationships, we have to very specifically tell graphQL how our data is arranged and how it can be accessed,
+1. GraphQL doesn't go to our databases and figure out the relationships, we have to very specifically tell graphQL how our data is arranged and how it can be accessed.
 2. schema.js - all the knowledge of how our application looks like, what properties it have and all the relations.
 3. Root Query - Entry point of our application, that allows us to jump at a specific point in our application. All the queries in graphql gets send to the rootQuery type, which searches for that type inside its field object.
-4. Object Types - GraphQL Object types, that defines the datatypes for the data in our application, which has two required properties name of the object type, and the fields object. It can also optional resolve property, to programitically fetch/resolve a field.
+4. Object Types - GraphQL Object types, that defines the datatypes for the data in our application, which has two required properties name of the object type, and the fields object. It can also have a optional resolve property, to programitically fetch/resolve a field.
 5. GraphQL can serve a proxy of sort to go to many servers, fetch the data from them, assemble it, and send it back as response (graphql can return promise from resolve).
 6. Association - We define association as if it were another field in that object, giving it our own custom defined type for that assoication and giving it a resolve-function(function which helps us jump from one point of graph to another point, that returns reference to another object in our graph) for the value.
 7. Each edge on the grah can be thought of as a resolve funtion, in case of circular reference, wrap the field object inside an arrow function.
-8. The second part of the schema file are mutations, which are used to modify the data in some fashion. Mutation logic never goes inside the Object type definition, we need to create new object for mutations. Each field in mutation can have type, which defines the type of data that will be returned from this mutation, args - the params that this mutation will receive and resolve function where the actual logic of the mutaion goes, the mutation property name describes the kind of operation that this mutation is going to perform.
+8. The second part of the schema files are mutations, which are used to modify the data in some fashion. Mutation logic never goes inside the Object type definition, we need to create new object for mutations. Each field in mutation can have type, which defines the type of data that will be returned from this mutation, args - the params that this mutation will receive and resolve function where the actual logic of the mutaion goes, the mutation property name describes the kind of operation that this mutation is going to perform.
 9. All the mutations should be the part of field property of the mutation object. We annotate the type of data that will be returned using the type property of the mutation, so that graphql will know what will be returned.
 
 GraphQL clients - (Apollo)
